@@ -1,0 +1,36 @@
+<html>
+<head>
+<link rel="stylesheet" href="leaflet/leaflet.css"/>
+<script src="leaflet/leaflet.js"></script>
+<!-- Basemap -->
+<link rel="stylesheet" href="leaflet/leaflet.groupedlayercontrol.css"/>
+<script src="leaflet/leaflet.groupedlayercontrol.js"></script>
+<!-- SHP Solo -->
+<script src="solo.js"></script>
+</head>
+<body>
+<div style="height:500px" id="mapid"></div>
+<!-- Bodymap -->
+<script>
+var mymap = L.map('mapid').setView([-7.569437, 110.825272], 13);
+var GoogleMaps = new
+L.TileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+opacity: 1.0, attribution: 'Ketrampilan Berkehidupan dan WEBSIG UMS'
+}).addTo(mymap);
+var GoogleSatelliteHybrid =
+L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+maxZoom: 22,
+attribution: 'Ketrampilan Berkehidupan dan WEBSIG UMS'
+});
+var baseLayers = {
+'Google Satellite Hybrid': GoogleSatelliteHybrid,
+'Google Maps': GoogleMaps,
+};
+L.control.groupedLayers(baseLayers).addTo(mymap);
+<!-- Memunculkan polygon -->
+var polyg2 = L.geoJson(polygons.features).addTo(mymap);
+var marker = L.marker([-7.56945, 110.82528]).addTo(mymap);
+marker.bindPopup("<b>Informasi</b><br>Rumah Budi – E1800000");
+</script>
+</body>
+</html>
